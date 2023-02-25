@@ -4,7 +4,7 @@ namespace gNdgd.UI.Models
 {
     public class OrderStatus
     {
-        public int I { get; set; }
+        public int Id { get; set; }
         [Required,MaxLength(20)]
         public string StatusName { get; set; }
     }
