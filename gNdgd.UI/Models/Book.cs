@@ -7,6 +7,8 @@ namespace gNdgd.UI.Models
         public int Id { get; set; }
         [Required,MaxLength(40)]
         public string BookName { get; set; }
+        [Required, MaxLength(40)]
+        public string AuthorName { get; set; }
         public double Price { get; set; }
         public string Image { get; set; }
         [Required]
