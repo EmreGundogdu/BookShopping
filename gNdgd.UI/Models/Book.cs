@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace gNdgd.UI.Models
 {
@@ -16,6 +17,7 @@ namespace gNdgd.UI.Models
         public Genre Genre { get; set; }
         public List<OrderDetail> OrderDetails{ get; set; }
         public List<CartDetail> CartDetails{ get; set; }
-
+        [NotMapped]
+        public string GenreName{ get; set; }
     }
 }
