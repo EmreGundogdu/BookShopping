@@ -6,7 +6,7 @@ namespace gNdgd.UI.Models
     {
         public int Id { get; set; }
         [Required]
-        public string UserI { get; set; }
+        public string UserId { get; set; }
         public bool IsDeleted { get; set; } = false;
     }
 }
