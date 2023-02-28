@@ -24,7 +24,7 @@ public class HomeRepository:IHomeRepository
                          Price = book.Price,
                          GenreName = book.GenreName,
                      }).ToListAsync();
-        if (categoryId>0)
+        if (genreId > 0)
         {
             books = books.Where(x => x.GenreId == genreId).ToList();
         }
