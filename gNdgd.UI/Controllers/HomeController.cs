@@ -7,15 +7,18 @@ namespace gNdgd.UI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        readonly IHomeRepository homeRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IHomeRepository homeRepository)
         {
             _logger = logger;
+            this.homeRepository = homeRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string sterm="",int genreId = 0)
         {
-            return View();
+            var books =await homeRepository.DisplayBooks(sterm, genreId);
+            return View(books);
         }
 
         public IActionResult Privacy()
