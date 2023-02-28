@@ -59,13 +59,18 @@
 </div>
 @section Scripts{
 	<script>
-		async function add(bookId){
+		async function add(bookId) {
+			var username = docu.getElementById("username");
+			if (username == null) {
+				window.location.href = "/identity/account/login";
+			}
 			try {
 				var response = await fetch($"/cart/additem?bookId=${bookId}");
 				if (response.status==200) {
 					var result = await response.json();
-					var cartCount = document.getElementById("#cartCount");
+					var cartCount = document.getElementById("cartCount");
 					cartCount.innerHTML = result;
+					window.location.href = "#cartCount";
 				}
 			}
 			catch (err) {

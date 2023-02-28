@@ -49,11 +49,12 @@
 	<script>
 		loadCartCount();
 		async function loadCartCount() {
+			
 			try {
 				var response = await fetch($"/cart/gettotalitemincart");
 				if (response.status == 200) {
 					var result = await response.json();
-					var cartCount = document.getElementById("#cartCount");
+					var cartCount = document.getElementById("cartCount");
 					cartCount.innerHTML = result;
 				}
 			}
