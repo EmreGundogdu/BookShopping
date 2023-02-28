@@ -1,4 +1,5 @@
 ﻿using gNdgd.UI.Models;
+using gNdgd.UI.Models.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -18,7 +19,13 @@ namespace gNdgd.UI.Controllers
         public async Task<IActionResult> Index(string sterm="",int genreId = 0)
         {
             var books =await homeRepository.DisplayBooks(sterm, genreId);
-            return View(books);
+            var genres =await homeRepository.Genres();
+            BookDisplayModel bookModel = new()
+            {
+                Books = books,
+                Genres = genres
+            };
+            return View(bookModel);
         }
 
         public IActionResult Privacy()
