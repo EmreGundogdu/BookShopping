@@ -1,19 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 namespace gNdgd.UI.Repositories;
-public class HomeRepository
+public class HomeRepository:IHomeRepository
 {
     readonly ApplicationDbContext context;
     public HomeRepository(ApplicationDbContext context)
     {
         this.context = context;
     }
-    public async Task<IEnumerable<Book>> DisplayBooks(string sTerm = "", int categoryId = 0)
+    public async Task<IEnumerable<Book>> DisplayBooks(string sTerm = "", int genreId = 0)
     {
         sTerm = sTerm.ToLower();
         IEnumerable<Book> books = await (from book in context.Books
                      join genre in context.Genres on book.GenreId equals genre.Id
-                     where string.IsNullOrEmpty(sTerm) || (book != null && book.BookName.ToLower().StartsWith(sTerm))
+                     where string.IsNullOrWhiteSpace(sTerm) || (book != null && book.BookName.ToLower().StartsWith(sTerm))
                      select new Book
                      {
                          Id = book.Id,
@@ -26,7 +26,7 @@ public class HomeRepository
                      }).ToListAsync();
         if (categoryId>0)
         {
-            books = books.Where(x => x.GenreId == categoryId).ToList();
+            books = books.Where(x => x.GenreId == genreId).ToList();
         }
         return books;
     }
