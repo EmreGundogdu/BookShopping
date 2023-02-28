@@ -1,20 +1,20 @@
-﻿@model IEnumerable<Book>
+﻿@model BookDisplayModel
 @{
 	ViewData["Title"] = "Home Page";
 }
 
 <div class="my-4">
-	<form class="row row-cols-lg-auto g-3 align-items-center">
+	<form asp-action="Index" class="row row-cols-lg-auto g-3 align-items-center">
 
 
 		<div class="col-12">
 			<label class="visually-hidden" for="inlineFormSelectPref">Genres</label>
-			<select class="form-select" id="genreId">
+			<select class="form-select" name="genreId">
 				<option selected>Choose...</option>
-				<option value="1">Action</option>
-				<option value="2">Horror</option>
-				<option value="3">Romance</option>
-				<option value="3">ScienceFiction</option>
+				@foreach (var item in Model.Genres)
+				{
+					<option value="@itemId">@item.GenreName</option>
+				}
 			</select>
 		</div>
 
@@ -22,7 +22,7 @@
 			<label class="visually-hidden" for="inlineFormInputGroupUsername">Search By Title</label>
 			<div class="input-group">
 				<div class="input-group-text"></div>
-				<input type="text" class="form-control" id="genreId" placeholder="Seach By Title">
+				<input type="text" class="form-control" name="sterm" id="genreId" placeholder="Seach By Title">
 			</div>
 		</div>
 
@@ -33,7 +33,7 @@
 </div>
 
 <div class="w-100 mt-4 d-flex flex-wrap">
-	@foreach (var book in Model)
+	@foreach (var book in Model.Books)
 	{
 		<div class="card mx-2 mb-4" style="width: 16rem;">
 			@if (string.IsNullOrEmpty(book.Image))
@@ -44,15 +44,13 @@
 			{
 				<img style="width:100%;height:300px;" src="~/images/@book.Image" class="card-img-top" alt="...">
 			}
-			<div class="card-body">
-				<h5 class="card-title">@book.BookName</h5>
-				<p class="card-text">
-					Genre: @book.GenreName
-					Author: @book.AuthorName
-					Price:@book.Price
-				</p>
-				<a class="btn btn-outline-primary">Add to cart</a>
-			</div>
+		<div class="card-body">
+			<h5 class="card-title">@book.BookName</h5>
+			<p class="card-text">Genre: @book.GenreName</p>
+			<p>Author: @book.AuthorName</p>
+			<p>Price:@book.Price</p>
+			<a class="btn btn-outline-primary">Add to cart</a>
+		</div>
 		</div>
 	}
 </div>
