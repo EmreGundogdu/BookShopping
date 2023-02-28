@@ -23,7 +23,9 @@ namespace gNdgd.UI.Controllers
             BookDisplayModel bookModel = new()
             {
                 Books = books,
-                Genres = genres
+                Genres = genres,
+                STerm = sterm,
+                GenreId = genreId
             };
             return View(bookModel);
         }

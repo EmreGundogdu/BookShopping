@@ -8,26 +8,27 @@
 
 
 		<div class="col-12">
-			<label class="visually-hidden" for="inlineFormSelectPref">Genres</label>
+			<label class="visually-hidden" for="genreId">Genres</label>
 			<select class="form-select" name="genreId">
-				<option selected>Choose...</option>
+				<option selected>Genre</option>
 				@foreach (var item in Model.Genres)
 				{
-					<option value="@itemId">@item.GenreName</option>
+					<option selected="@(item.Id == Model.GenreId)" value="@itemId">@item.GenreName</option>
 				}
 			</select>
 		</div>
 
 		<div class="col-12">
-			<label class="visually-hidden" for="inlineFormInputGroupUsername">Search By Title</label>
+			<label class="visually-hidden" for="sterm">Search By Title</label>
 			<div class="input-group">
 				<div class="input-group-text"></div>
-				<input type="text" class="form-control" name="sterm" id="genreId" placeholder="Seach By Title">
+				<input type="text" class="form-control" value="@Model.STerm" name="sterm" id="genreId" placeholder="Seach By Title">
 			</div>
 		</div>
 
 		<div class="col-12">
 			<button type="submit" class="btn btn-primary">Search</button>
+			<a  href="/home/index" type="reset" class="btn btn-dark">Reset</a>
 		</div>
 	</form>
 </div>
