@@ -1,6 +1,4 @@
-﻿using gNdgd.UI.Models;
-using gNdgd.UI.Models.Dtos;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace gNdgd.UI.Controllers
