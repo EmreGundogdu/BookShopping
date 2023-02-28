@@ -6,21 +6,34 @@ namespace gNdgd.UI.Controllers
     [Authorize]
     public class CartController : Controller
     {
-        public IActionResult AddItem(int bookId,int quantity=1)
+        readonly ICartRepository cartRepository;
+
+        public CartController(ICartRepository cartRepository)
         {
-            return View();
+            this.cartRepository = cartRepository;
         }
-        public IActionResult RemoveItem(int bookId)
+
+        public async Task<IActionResult> AddItem(int bookId,int quantity=1,int redirect=0)
         {
-            return View();
+            var cartCount =await cartRepository.AddCart(bookId, quantity);
+            if (redirect == 0)
+                return Ok();
+            return RedirectToAction("GetUserCart");
         }
-        public IActionResult GertUserCart()
+        public async Task<IActionResult> RemoveItem(int bookId)
         {
-            return View();
+            var cartCount = await cartRepository.RemoveCart(bookId);
+            return RedirectToAction("GetUserCart");
         }
-        public IActionResult GetTotalItemInCart()
+        public async Task<IActionResult> GertUserCart()
         {
-            return View();
+            var cart = await cartRepository.GetUserCart();
+            return View(cart);
+        }
+        public async Task<IActionResult> GetTotalItemInCart()
+        {
+            var cartItem =await cartRepository.GetCartItemCount();
+            return Ok(cartItem);
         }
     }
 }
