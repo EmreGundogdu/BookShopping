@@ -30,4 +30,8 @@ public class HomeRepository:IHomeRepository
         }
         return books;
     }
+    public async Task<IEnumerable<Genre>> Genres()
+    {
+        return await context.Genres.ToListAsync();
+    }
 }
