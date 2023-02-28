@@ -4,7 +4,7 @@
     {
         Task<int> AddCart(int bookId, int quantity);
         Task<int> RemoveCart(int bookId);
-        Task<IEnumerable<ShoppingCart>> GetUserCart();
+        Task<ShoppingCart> GetUserCart();
         Task<int> GetCartItemCount(string userId = "");
     }
 }

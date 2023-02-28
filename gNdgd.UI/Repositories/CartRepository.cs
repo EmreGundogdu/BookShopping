@@ -86,12 +86,12 @@ namespace gNdgd.UI.Repositories
             return cartItemCount;
         }
 
-        public async Task<IEnumerable<ShoppingCart>> GetUserCart()
+        public async Task<ShoppingCart> GetUserCart()
         {
             var userId = GetUserId();
             if (userId is null)
                 throw new Exception("User not found");
-            var shoppingCart = await context.ShoppingCarts.Include(x => x.CartDetails).ThenInclude(x => x.Book).ThenInclude(x => x.Genre).Where(x => x.UserId == userId).ToListAsync();
+            var shoppingCart = await context.ShoppingCarts.Include(x => x.CartDetails).ThenInclude(x => x.Book).ThenInclude(x => x.Genre).Where(x => x.UserId == userId).FirstOrDefaultAsync();
             return shoppingCart;
         }
 
