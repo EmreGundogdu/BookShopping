@@ -25,7 +25,7 @@ namespace gNdgd.UI.Controllers
             var cartCount = await cartRepository.RemoveCart(bookId);
             return RedirectToAction("GetUserCart");
         }
-        public async Task<IActionResult> GertUserCart()
+        public async Task<IActionResult> GetUserCart()
         {
             var cart = await cartRepository.GetUserCart();
             return View(cart);
@@ -34,6 +34,13 @@ namespace gNdgd.UI.Controllers
         {
             var cartItem =await cartRepository.GetCartItemCount();
             return Ok(cartItem);
+        }
+        public async Task<IActionResult> Checkout()
+        {
+            bool isCheckedOut = await cartRepository.DoCheckout();
+            if (!isCheckedOut)
+                throw new Exception("Something happen in server side");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
